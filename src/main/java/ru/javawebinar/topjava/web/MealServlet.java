@@ -13,7 +13,8 @@ public class MealServlet extends HttpServlet {
     private static final Logger log = getLogger(MealServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.debug("redirect to meals");
+        log.info("redirect to meals");
+//        request.setAttribute("meals",);
         response.sendRedirect("meals.jsp");
     }
 
