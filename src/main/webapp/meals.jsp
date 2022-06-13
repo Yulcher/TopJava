@@ -1,25 +1,52 @@
-<%@ page import="ru.javawebinar.topjava.model.Meal" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Yulcher
-  Date: 04.06.2022
-  Time: 2:26
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8"%>
-<html lang="ru">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
+<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>--%>
+<html>
 <head>
-    <title>Meals</title>
+    <title>Meal list</title>
+    <style>
+        .normal {
+            color: green;
+        }
+
+        .excess {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-<h3><a href="index.html">Home</a></h3>
-<hr>
+<section>
+    <h3><a href="index.html">Home</a></h3>
+    <hr/>
+    <h2>Meals</h2>
+    <a href="meals?action=create">Add Meal</a>
+    <br><br>
 
-<%--<c:set var="list" value="meals"/>--%>
-<%--<c:forEach var="num" items="${list}">--%>
-<%--    <p>${num}</p>--%>
-<%--</c:forEach>--%>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Calories</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <c:forEach items="${requestScope.meals}" var="meal">
+            <tr class="${meal.excess ? 'excess' : 'normal'}">
+                <td>${fn:formatDateTime(meal.dateTime)}</td>
+                <td>${meal.description}</td>
+                <td>${meal.calories}</td>
+                <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
+                <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
+            </tr>
+        </c:forEach>
 
+    </table>
+
+
+</section>
 </body>
 </html>
