@@ -32,7 +32,8 @@ public class MealsUtil {
 //        List<MealTo> mealsTo = filteredByStreams(meals, startTime, endTime, DEFAULT_CALORIES_PER_DAY);
 //        mealsTo.forEach(System.out::println);
 //        System.out.println(filteredByCycles(meals, startTime, endTime, caloriesPerDay));
-       getMealsTo().forEach(System.out::println);
+//       getMealsTo().forEach(System.out::println);
+        (new InMemoryMealRepository()).getAll().forEach(System.out::println);
     }
 
 

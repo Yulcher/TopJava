@@ -3,8 +3,8 @@ package ru.javawebinar.topjava.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.repository.InMemoryMealRepository;
 import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.repository.inmemory.InMemoryMealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import javax.servlet.ServletException;
@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.plaf.synth.SynthButtonUI;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class MealServlet extends HttpServlet {
@@ -64,7 +67,7 @@ public class MealServlet extends HttpServlet {
             default:
                 log.info("getAll");
                 request.setAttribute("meals", MealsUtil.getMealsTo());
-                request.setAttribute("mealsList", getAll().getAll());
+//                request.setAttribute("meals", MealsUtil.filteredByStreams(new ArrayList(repository.getAll()), LocalTime.MIN,LocalTime.MAX,MealsUtil.DEFAULT_CALORIES_PER_DAY));
                 getServletContext().getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }
@@ -78,6 +81,4 @@ public class MealServlet extends HttpServlet {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
         return Integer.parseInt(paramId);
     }
-
-
 }

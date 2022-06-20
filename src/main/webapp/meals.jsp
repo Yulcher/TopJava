@@ -34,16 +34,16 @@
             <th>Delete</th>
         </tr>
         </thead>
-        <c:forEach items="${requestScope.meals}" var="meal">
+        <c:forEach items="${requestScope.meals}" var="meal" step="1" begin="0" varStatus="mealStatus">
+            <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealTo"/>
             <tr class="${meal.excess ? 'excess' : 'normal'}">
                 <td>${fn:formatDateTime(meal.dateTime)}</td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-                <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
-                <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
+                <td><a href="meals?action=update&id=${mealStatus.index}">Update</a></td>
+                <td><a href="meals?action=delete&id=${mealStatus.index}">Delete</a></td>
             </tr>
         </c:forEach>
-
     </table>
 
 
